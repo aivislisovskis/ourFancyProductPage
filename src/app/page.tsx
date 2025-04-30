@@ -235,26 +235,19 @@ export default function ProductPage() {
                 <div>
                   <h3 className="text-lg font-medium mb-4">Product Description</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    Our Premium Pain Relief Medication provides fast, effective relief for headaches, muscle pain, 
-                    and minor arthritis discomfort. Specially formulated with pharmaceutical-grade ingredients, 
-                    this medication is gentle on the stomach while delivering maximum strength pain relief. 
-                    Each tablet is coated for easy swallowing and begins working within minutes to reduce pain 
-                    and inflammation.
+                    Supplemeds™ Mixer – Ships fast. Hits different.
+                    Unleash your perfect vibe with Supplemeds™ Mixer, the first-ever customizable supplement experience that lets you create your own mood-boosting blend. Whether you want more focus, euphoria, calm, or creative flow, simply drag and drop your desired effects and we'll craft a legal, plant-based formula designed just for you.
+                    No prescriptions. No guesswork. Just clean, feel-good ingredients backed by science and formulated for your lifestyle.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium mb-4">Benefits</h3>
+                  <h3 className="text-lg font-medium mb-4">🌈 How It Works</h3>
                   <ul className="space-y-2">
                     {[
-                      "Fast-acting formula begins working within minutes",
-                      "Long-lasting relief for up to 8 hours",
-                      "Gentle on the stomach with protective coating",
-                      "Reduces inflammation as well as pain",
-                      "Non-drowsy formula won't affect alertness",
-                      "Easy to swallow tablets with mild flavor",
-                      "Appropriate for adults and children over 12",
-                      "Clinically tested and physician recommended",
+                      "Choose Your Effects – Pick up to 4 from our curated mood stack: Focus, Energy, Chill, Euphoria, Creativity, Recovery, and more.",
+                      "Watch Your Blend Take Shape – Our smart mixer balances your formula in real time.",
+                      "Personalize It – Name your blend, pick a format (capsules, gummies, or powder), and we'll handle the rest.",
                     ].map((benefit, i) => (
                         <li key={i} className="flex items-start space-x-2">
                           <Check className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
@@ -265,11 +258,13 @@ export default function ProductPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium mb-4">Product Details</h3>
+                  <h3 className="text-lg font-medium mb-4">🔬 What's Inside?</h3>
                   <ul className="space-y-2">
                     {[
-                      "Not intended for use by children under 12 without physician approval",
-                      "Store in a cool, dry place away from direct sunlight",
+                      "Adaptogens, nootropics, and botanicals",
+                      "Clinically-backed ingredients",
+                      "No fillers, no BS",
+                      "Always legal and third-party tested",
                     ].map((detail, i) => (
                         <li key={i} className="flex items-start space-x-2">
                           <Check className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
@@ -280,13 +275,13 @@ export default function ProductPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium mb-4">More Details</h3>
+                  <h3 className="text-lg font-medium mb-4">⚡ Why You'll Love It</h3>
                   <ul className="space-y-2">
                     {[
-                      "Active ingredient: Acetaminophen 500mg",
-                      "Secondary ingredient: Anti-inflammatory compound",
-                      "Package Variants: 30, 60, or 100 tablets",
-                      "NDC: 12345-678-90",
+                      "Tailored effects, made-to-order",
+                      "Great for social energy, flow states, or winding down",
+                      "Safe to stack with your lifestyle — or your playlist",
+                      "Ships fast. Hits different.",
                     ].map((detail, i) => (
                         <li key={i} className="flex items-start space-x-2">
                           <Check className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
@@ -294,6 +289,16 @@ export default function ProductPage() {
                         </li>
                     ))}
                   </ul>
+                </div>
+                
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-medium mb-2">🎁 Special Offer</h3>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Design your first blend today and feel the freedom of functional supplements done your way.
+                  </p>
+                  <Button className="bg-blue-600 hover:bg-blue-700">
+                    👉 Start Mixing Now
+                  </Button>
                 </div>
               </div>
             </TabsContent>
