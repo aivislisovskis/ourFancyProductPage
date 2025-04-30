@@ -2,6 +2,7 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight, Heart, Minus, Plus, ShoppingCart, Check } from "lucide-react"
 import { Button } from "./components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs"
+import {Slider} from "./components/Slider";
 
 // Define the slider icons and their labels
 const sliderIcons = [
@@ -146,22 +147,8 @@ export default function ProductPage() {
 
               <div className="flex justify-between items-center">
                 <div className="flex space-x-8">
-                  {sliderIcons.map((item, i) => (
-                      <div key={i} className="flex flex-col items-center">
-                        <div className="w-1 h-20 bg-blue-100 rounded-full relative mb-2">
-                          <div className="absolute bottom-0 w-1 h-12 bg-blue-500 rounded-full"></div>
-                          <div className="absolute bottom-12 -left-1.5 w-4 h-4 rounded-full bg-blue-500"></div>
-                        </div>
-                        <div className="w-6 h-6">
-                          <Image 
-                            src={item.icon} 
-                            alt={item.alt} 
-                            width={24} 
-                            height={24}
-                            className="w-full h-full object-contain" 
-                          />
-                        </div>
-                      </div>
+                  {sliderIcons.map((emoji, i) => (
+                      <Slider key={i} emoji={item} i={i}/>
                   ))}
                 </div>
                 <Button variant="outline" size="sm" className="text-xs rounded-full">
@@ -291,7 +278,7 @@ export default function ProductPage() {
                     ))}
                   </ul>
                 </div>
-                
+
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <h3 className="text-lg font-medium mb-2">🎁 Special Offer</h3>
                   <p className="text-gray-600 text-sm mb-4">
@@ -416,7 +403,7 @@ export default function ProductPage() {
                       <div className="text-xs text-gray-500 mb-2">
                         <span className="font-medium">Key Ingredients:</span> {product.ingredients}
                       </div>
-                      
+
                       <div className="mb-2">
                         <span className="text-xs font-medium">Effects:</span>
                         <ul className="text-xs text-gray-600 mt-1 ml-2">
@@ -430,11 +417,11 @@ export default function ProductPage() {
                           ))}
                         </ul>
                       </div>
-                      
+
                       <div className="text-xs">
                         <span className="font-medium">Use it for:</span> {product.useCase}
                       </div>
-                      
+
                       <div className="mt-3 flex justify-between items-center">
                         <div className="font-bold">${(35.99 + i * 2).toFixed(2)}</div>
                         <Button size="sm" variant="outline" className="text-xs py-1 h-8">
