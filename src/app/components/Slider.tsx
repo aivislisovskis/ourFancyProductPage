@@ -1,9 +1,10 @@
 'use client'
 
 import { Slider as SliderUI } from "./ui/slider"
+import Image from "next/image"
 
 interface SliderProps {
-    emoji: string
+    emoji: { icon: string, alt: string }
     i: number
     min?: number
     max?: number
@@ -35,7 +36,15 @@ export const Slider = ({
                 orientation="vertical"
                 className="h-[100px]"
             />
-            <div className="text-xl">{emoji}</div>
+            <div className="text-xl">
+                <Image
+                    src={emoji.icon}
+                    alt={emoji.alt}
+                    width={24}
+                    height={24}
+                    className="w-full h-full object-contain"
+                />
+            </div>
         </div>
     )
 }

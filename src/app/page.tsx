@@ -148,7 +148,7 @@ export default function ProductPage() {
               <div className="flex justify-between items-center">
                 <div className="flex space-x-8">
                   {sliderIcons.map((emoji, i) => (
-                      <Slider key={i} emoji={item} i={i}/>
+                      <Slider key={i} emoji={emoji} i={i}/>
                   ))}
                 </div>
                 <Button variant="outline" size="sm" className="text-xs rounded-full">
