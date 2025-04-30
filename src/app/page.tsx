@@ -33,6 +33,10 @@ export default function ProductPage() {
   const [sliderValues, setSliderValues] = useState([60, 40, 60, 40]);
   // State for quantity
   const [quantity, setQuantity] = useState(1);
+  // State to track image changes for animation
+  const [imageChanged, setImageChanged] = useState(false);
+  // Track the previous image index to detect changes
+  const [prevImageIndex, setPrevImageIndex] = useState(0);
   
   // Calculate the price based on slider values (dosage)
   const calculatePrice = () => {
@@ -44,11 +48,56 @@ export default function ProductPage() {
     return (pricePerItem * quantity).toFixed(2);
   };
 
+  // Determine which product image to display based on slider values
+  const getProductImageIndex = () => {
+    // Get average value to determine general intensity
+    const avgValue = sliderValues.reduce((sum, value) => sum + value, 0) / sliderValues.length;
+    
+    // Find which slider has the highest value (dominant characteristic)
+    const maxValueIndex = sliderValues.indexOf(Math.max(...sliderValues));
+    
+    // Find secondary characteristic (second highest value)
+    const valuesCopy = [...sliderValues];
+    const maxValue = valuesCopy[maxValueIndex];
+    valuesCopy[maxValueIndex] = -1; // Mark the max value as processed
+    const secondMaxValueIndex = valuesCopy.indexOf(Math.max(...valuesCopy));
+    
+    // Main determining factor is the dominant characteristic (maxValueIndex)
+    // but we adjust based on overall intensity (avgValue)
+    const baseIndex = maxValueIndex;
+    
+    // Adjust the index based on overall intensity and secondary characteristic
+    if (avgValue > 75) {
+      // High intensity combinations
+      return Math.min(baseIndex + 1, pillImages.length - 1);
+    } else if (avgValue < 30) {
+      // Low intensity combinations
+      return Math.max(0, pillImages.length - baseIndex - 1);
+    } else if (secondMaxValueIndex >= 0 && sliderValues[secondMaxValueIndex] > 60) {
+      // Strong secondary characteristic
+      const combinedIndex = (baseIndex + secondMaxValueIndex) % pillImages.length;
+      return combinedIndex;
+    }
+    
+    // Default: use the base index (dominant characteristic)
+    return baseIndex;
+  };
+
   // Handle slider change
   const handleSliderChange = (index: number, newValue: number) => {
     const newSliderValues = [...sliderValues];
     newSliderValues[index] = parseInt(String(newValue));
     setSliderValues(newSliderValues);
+    
+    // Check if the image index has changed
+    const currentImageIndex = getProductImageIndex();
+    if (currentImageIndex !== prevImageIndex) {
+      setPrevImageIndex(currentImageIndex);
+      // Trigger animation
+      setImageChanged(true);
+      // Reset animation flag after animation completes
+      setTimeout(() => setImageChanged(false), 600);
+    }
   };
 
   // Handle quantity change
@@ -64,6 +113,11 @@ export default function ProductPage() {
   const surpriseMe = () => {
     const randomValues = Array(4).fill(0).map(() => Math.floor(Math.random() * 101));
     setSliderValues(randomValues);
+    
+    // Trigger image change animation
+    setImageChanged(true);
+    setPrevImageIndex(getProductImageIndex());
+    setTimeout(() => setImageChanged(false), 600);
   };
 
   return (
@@ -124,21 +178,26 @@ export default function ProductPage() {
           <div className="grid md:grid-cols-2 gap-10">
             {/* Product Images */}
             <div className="space-y-4">
-              <div className="bg-orange-100 rounded-lg overflow-hidden p-4">
+              <div className={`bg-orange-100 rounded-lg overflow-hidden p-4 relative transition-all duration-300 ${imageChanged ? 'scale-105' : 'scale-100'}`}>
                 <Image
-                    src="/image (8).png"
+                    src={pillImages[getProductImageIndex()]}
                     alt="Premium Pain Relief Medication"
                     width={500}
                     height={500}
-                    className="mx-auto"
+                    className={`mx-auto transition-opacity duration-300 ${imageChanged ? 'opacity-80' : 'opacity-100'}`}
                 />
+                {imageChanged && (
+                  <div className="absolute top-2 right-2 bg-blue-600 text-white text-xs py-1 px-2 rounded-full animate-pulse">
+                    Formula adjusting...
+                  </div>
+                )}
               </div>
               <div className="relative">
                 <div className="flex space-x-2 overflow-x-auto py-2">
                   {pillImages.map((src, i) => (
                       <div
                           key={i}
-                          className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 ${i === 0 ? "border-blue-500" : "border-transparent"}`}
+                          className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition-all ${i === getProductImageIndex() ? "border-blue-500 shadow-md" : "border-transparent"}`}
                       >
                         <Image
                             src={src}
