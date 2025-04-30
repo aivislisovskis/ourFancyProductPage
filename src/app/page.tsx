@@ -1,14 +1,17 @@
+"use client"
+
 import Image from "next/image"
 import { ChevronLeft, ChevronRight, Heart, Minus, Plus, ShoppingCart, Check } from "lucide-react"
 import { Button } from "./components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs"
+import { useState } from "react"
 
 // Define the slider icons and their labels
 const sliderIcons = [
-  { icon: "/smile icon.png", alt: "Satisfaction" },
-  { icon: "/peace icon.png", alt: "Quality" },
-  { icon: "/lightning icon.png", alt: "Speed" },
-  { icon: "/rainbow icon.png", alt: "Design" }
+  { icon: "/smile icon.png", alt: "Satisfaction", name: "Satisfaction" },
+  { icon: "/peace icon.png", alt: "Quality", name: "Quality" },
+  { icon: "/lightning icon.png", alt: "Speed", name: "Speed" },
+  { icon: "/rainbow icon.png", alt: "Design", name: "Design" }
 ]
 
 // Define the pill images for thumbnails and similar products
@@ -20,7 +23,49 @@ const pillImages = [
   "/image (9).png",
 ]
 
+// Base price for the product
+const BASE_PRICE = 49.99;
+// Additional price per unit of dosage
+const PRICE_PER_UNIT = 5.39;
+
 export default function ProductPage() {
+  // State for slider values (0-100)
+  const [sliderValues, setSliderValues] = useState([60, 40, 60, 40]);
+  // State for quantity
+  const [quantity, setQuantity] = useState(1);
+  
+  // Calculate the price based on slider values (dosage)
+  const calculatePrice = () => {
+    // Get the average of all slider values
+    const averageDosage = sliderValues.reduce((sum, value) => sum + value, 0) / sliderValues.length;
+    // Calculate price: base price + additional price based on dosage
+    const pricePerItem = BASE_PRICE + (averageDosage / 100) * PRICE_PER_UNIT * 10;
+    // Multiply by quantity and return formatted price
+    return (pricePerItem * quantity).toFixed(2);
+  };
+
+  // Handle slider change
+  const handleSliderChange = (index: number, newValue: number) => {
+    const newSliderValues = [...sliderValues];
+    newSliderValues[index] = parseInt(String(newValue));
+    setSliderValues(newSliderValues);
+  };
+
+  // Handle quantity change
+  const decreaseQuantity = () => {
+    if (quantity > 1) setQuantity(quantity - 1);
+  };
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  // Generate random values for the "Surprise me" button
+  const surpriseMe = () => {
+    const randomValues = Array(4).fill(0).map(() => Math.floor(Math.random() * 101));
+    setSliderValues(randomValues);
+  };
+
   return (
       <div className="min-h-screen bg-white">
         {/* Header */}
@@ -150,36 +195,89 @@ export default function ProductPage() {
               <div className="flex justify-between items-center">
                 <div className="flex space-x-8">
                   {sliderIcons.map((item, i) => (
-                      <div key={i} className="flex flex-col items-center">
-                        <div className="w-1 h-20 bg-blue-100 rounded-full relative mb-2">
-                          <div className="absolute bottom-0 w-1 h-12 bg-blue-500 rounded-full"></div>
-                          <div className="absolute bottom-12 -left-1.5 w-4 h-4 rounded-full bg-blue-500"></div>
-                        </div>
-                        <div className="w-6 h-6">
-                          <Image 
-                            src={item.icon} 
-                            alt={item.alt} 
-                            width={24} 
-                            height={24}
-                            className="w-full h-full object-contain" 
-                          />
-                        </div>
+                    <div key={i} className="flex flex-col items-center">
+                      <div className="w-1 h-20 bg-blue-100 rounded-full relative mb-2">
+                        <div 
+                          className="absolute bottom-0 w-1 bg-blue-500 rounded-full"
+                          style={{ height: `${sliderValues[i]}%` }}
+                        ></div>
+                        <div 
+                          className="absolute -left-1.5 w-4 h-4 rounded-full bg-blue-500 cursor-pointer"
+                          style={{ bottom: `${sliderValues[i]}%` }}
+                          onMouseDown={(e) => {
+                            // Get the slider track element
+                            const sliderTrack = e.currentTarget.parentElement;
+                            if (!sliderTrack) return;
+                            
+                            // Get the track's height and position
+                            const trackRect = sliderTrack.getBoundingClientRect();
+                            const trackHeight = trackRect.height;
+                            
+                            // Initial drag position
+                            const startY = e.clientY;
+                            const startValue = sliderValues[i];
+                            
+                            // Handler for mouse movement
+                            const handleMouseMove = (moveEvent: MouseEvent) => {
+                              // Calculate new position
+                              const deltaY = startY - moveEvent.clientY;
+                              const percentChange = (deltaY / trackHeight) * 100;
+                              let newValue = Math.min(100, Math.max(0, startValue + percentChange));
+                              
+                              // Update value
+                              handleSliderChange(i, newValue);
+                            };
+                            
+                            // Handler for mouse up
+                            const handleMouseUp = () => {
+                              document.removeEventListener('mousemove', handleMouseMove);
+                              document.removeEventListener('mouseup', handleMouseUp);
+                            };
+                            
+                            // Add event listeners
+                            document.addEventListener('mousemove', handleMouseMove);
+                            document.addEventListener('mouseup', handleMouseUp);
+                          }}
+                        ></div>
                       </div>
+                      <div className="w-6 h-6">
+                        <Image 
+                          src={item.icon} 
+                          alt={item.alt} 
+                          width={24} 
+                          height={24}
+                          className="w-full h-full object-contain" 
+                        />
+                      </div>
+                    </div>
                   ))}
                 </div>
-                <Button variant="outline" size="sm" className="text-xs rounded-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="text-xs rounded-full"
+                  onClick={surpriseMe}
+                >
                   Surprise me
                 </Button>
               </div>
 
-              <div className="text-3xl font-bold">$71.56</div>
+              <div className="text-3xl font-bold">${calculatePrice()}</div>
 
               <div className="flex items-center space-x-4">
-                <Button variant="outline" size="icon">
+                <Button 
+                  variant="outline" 
+                  size="icon"
+                  onClick={decreaseQuantity}
+                >
                   <Minus className="h-4 w-4" />
                 </Button>
-                <span className="text-lg">5</span>
-                <Button variant="outline" size="icon">
+                <span className="text-lg">{quantity}</span>
+                <Button 
+                  variant="outline" 
+                  size="icon"
+                  onClick={increaseQuantity}
+                >
                   <Plus className="h-4 w-4" />
                 </Button>
                 <Button className="flex-1 bg-blue-800 hover:bg-blue-900">
