@@ -26,7 +26,10 @@ export default function ProductPage() {
         {/* Header */}
         <header className="border-b py-4 px-6">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <div className="font-bold text-xl text-blue-900">MedSupply</div>
+            <div className="flex flex-col">
+              <div className="font-bold text-xl text-blue-900">Supplemeds</div>
+              <div className="text-xs text-gray-500">Ships fast. Hits Different.</div>
+            </div>
             <div className="hidden md:flex items-center space-x-8">
               <span className="text-sm">Category</span>
               <span className="text-sm">Brand</span>
@@ -460,7 +463,8 @@ export default function ProductPage() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <div className="font-bold text-xl text-gray-800 uppercase mb-4">MedSupply</div>
+                <div className="font-bold text-xl text-gray-800 uppercase mb-2">Supplemeds</div>
+                <div className="text-xs text-gray-500 mb-4">Ships fast. Hits Different.</div>
                 <div className="flex space-x-4 mt-4">
                   <a href="#" className="text-gray-500 hover:text-gray-700">
                     <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
