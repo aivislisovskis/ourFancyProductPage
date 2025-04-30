@@ -3,6 +3,14 @@ import { ChevronLeft, ChevronRight, Heart, Minus, Plus, ShoppingCart, Check } fr
 import { Button } from "./components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs"
 
+// Define the slider icons and their labels
+const sliderIcons = [
+  { icon: "/smile icon.png", alt: "Satisfaction" },
+  { icon: "/peace icon.png", alt: "Quality" },
+  { icon: "/lightning icon.png", alt: "Speed" },
+  { icon: "/rainbow icon.png", alt: "Design" }
+]
+
 export default function ProductPage() {
   return (
       <div className="min-h-screen bg-white">
@@ -128,13 +136,21 @@ export default function ProductPage() {
 
               <div className="flex justify-between items-center">
                 <div className="flex space-x-8">
-                  {["😊", "🟢", "⚡", "🟣"].map((emoji, i) => (
+                  {sliderIcons.map((item, i) => (
                       <div key={i} className="flex flex-col items-center">
                         <div className="w-1 h-20 bg-blue-100 rounded-full relative mb-2">
                           <div className="absolute bottom-0 w-1 h-12 bg-blue-500 rounded-full"></div>
                           <div className="absolute bottom-12 -left-1.5 w-4 h-4 rounded-full bg-blue-500"></div>
                         </div>
-                        <div className="text-xl">{emoji}</div>
+                        <div className="w-6 h-6">
+                          <Image 
+                            src={item.icon} 
+                            alt={item.alt} 
+                            width={24} 
+                            height={24}
+                            className="w-full h-full object-contain" 
+                          />
+                        </div>
                       </div>
                   ))}
                 </div>
