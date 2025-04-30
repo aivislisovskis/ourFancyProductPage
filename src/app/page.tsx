@@ -11,6 +11,15 @@ const sliderIcons = [
   { icon: "/rainbow icon.png", alt: "Design" }
 ]
 
+// Define the pill images for thumbnails and similar products
+const pillImages = [
+  "/image (5).png",
+  "/image (6).png",
+  "/image (7).png",
+  "/image (8).png",
+  "/image (9).png",
+]
+
 export default function ProductPage() {
   return (
       <div className="min-h-screen bg-white">
@@ -41,7 +50,7 @@ export default function ProductPage() {
                 </div>
               </div>
               <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
-                <Image src="/placeholder.svg?height=32&width=32" alt="User avatar" width={32} height={32} />
+                <Image src="/image (5).png" alt="User avatar" width={32} height={32} className="object-cover" />
               </div>
             </div>
           </div>
@@ -52,13 +61,13 @@ export default function ProductPage() {
           <div className="flex items-center text-sm text-gray-500">
             <span>Home</span>
             <ChevronRight className="w-4 h-4 mx-1" />
-            <span>Decorative</span>
+            <span>Medical</span>
             <ChevronRight className="w-4 h-4 mx-1" />
-            <span>Furniture</span>
+            <span>Pharmaceuticals</span>
             <ChevronRight className="w-4 h-4 mx-1" />
-            <span>Storage</span>
+            <span>Pain Relief</span>
             <ChevronRight className="w-4 h-4 mx-1" />
-            <span className="text-black">Sideboard</span>
+            <span className="text-black">Analgesics</span>
           </div>
         </div>
 
@@ -69,8 +78,8 @@ export default function ProductPage() {
             <div className="space-y-4">
               <div className="bg-orange-100 rounded-lg overflow-hidden p-4">
                 <Image
-                    src="/placeholder.svg?height=500&width=500"
-                    alt="Embrace Sideboard"
+                    src="/image (8).png"
+                    alt="Premium Pain Relief Medication"
                     width={500}
                     height={500}
                     className="mx-auto"
@@ -78,14 +87,14 @@ export default function ProductPage() {
               </div>
               <div className="relative">
                 <div className="flex space-x-2 overflow-x-auto py-2">
-                  {[1, 2, 3, 4, 5].map((i) => (
+                  {pillImages.map((src, i) => (
                       <div
                           key={i}
-                          className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 ${i === 1 ? "border-blue-500" : "border-transparent"}`}
+                          className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 ${i === 0 ? "border-blue-500" : "border-transparent"}`}
                       >
                         <Image
-                            src="/placeholder.svg?height=64&width=64"
-                            alt={`Thumbnail ${i}`}
+                            src={src}
+                            alt={`Medication view ${i+1}`}
                             width={64}
                             height={64}
                             className="w-full h-full object-cover"
@@ -105,8 +114,8 @@ export default function ProductPage() {
             {/* Product Details */}
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-2xl font-bold">Embrace Sideboard</h1>
-                <p className="text-sm text-gray-500">Teixeira Design Studio</p>
+                <h1 className="text-2xl font-bold">Premium Pain Relief Medication</h1>
+                <p className="text-sm text-gray-500">PharmaCare Professional Series</p>
               </div>
 
               <div className="flex items-center space-x-4">
@@ -226,10 +235,11 @@ export default function ProductPage() {
                 <div>
                   <h3 className="text-lg font-medium mb-4">Product Description</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    When it's colder than the far side of the moon and spitting rain too, you've still got to look good.
-                    From water-repellent leather to a rugged outsole, the Lunar Force 1 adapts AF-1 style, so you can keep
-                    your flame burning when the weather hits. Metal lace hardware and tongue bring mountain boot
-                    toughness, while the star-studded toe design gives your look the edge.
+                    Our Premium Pain Relief Medication provides fast, effective relief for headaches, muscle pain, 
+                    and minor arthritis discomfort. Specially formulated with pharmaceutical-grade ingredients, 
+                    this medication is gentle on the stomach while delivering maximum strength pain relief. 
+                    Each tablet is coated for easy swallowing and begins working within minutes to reduce pain 
+                    and inflammation.
                   </p>
                 </div>
 
@@ -237,14 +247,14 @@ export default function ProductPage() {
                   <h3 className="text-lg font-medium mb-4">Benefits</h3>
                   <ul className="space-y-2">
                     {[
-                      "Durable leather is easily cleanable so you can keep your look fresh.",
-                      "Water-repellent finish and internal membrane help keep your feet dry.",
-                      "Toe piece with star pattern adds durability.",
-                      "Synthetic insulation helps keep you warm.",
-                      "Originally designed for performance hoops, the Air unit delivers lightweight cushioning.",
-                      "Plush tongue wraps over the ankle to help keep out the moisture and cold.",
-                      "Rubber outsole with aggressive traction pattern adds durable grip.",
-                      "Durable leather is easily cleanable so you can keep your look fresh.",
+                      "Fast-acting formula begins working within minutes",
+                      "Long-lasting relief for up to 8 hours",
+                      "Gentle on the stomach with protective coating",
+                      "Reduces inflammation as well as pain",
+                      "Non-drowsy formula won't affect alertness",
+                      "Easy to swallow tablets with mild flavor",
+                      "Appropriate for adults and children over 12",
+                      "Clinically tested and physician recommended",
                     ].map((benefit, i) => (
                         <li key={i} className="flex items-start space-x-2">
                           <Check className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
@@ -258,8 +268,8 @@ export default function ProductPage() {
                   <h3 className="text-lg font-medium mb-4">Product Details</h3>
                   <ul className="space-y-2">
                     {[
-                      "Not intended for use as Personal Protective Equipment (PPE).",
-                      "Water-repellent finish and internal membrane help keep your feet dry.",
+                      "Not intended for use by children under 12 without physician approval",
+                      "Store in a cool, dry place away from direct sunlight",
                     ].map((detail, i) => (
                         <li key={i} className="flex items-start space-x-2">
                           <Check className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
@@ -273,10 +283,10 @@ export default function ProductPage() {
                   <h3 className="text-lg font-medium mb-4">More Details</h3>
                   <ul className="space-y-2">
                     {[
-                      "Lunarlon midsole delivers ultra-plush responsiveness",
-                      "Encapsulated Air-Sole heel unit for lightweight cushioning",
-                      "Color Shown: Ale Brown/Black/Goldtone/Ale Brown",
-                      "Style: 805899-202",
+                      "Active ingredient: Acetaminophen 500mg",
+                      "Secondary ingredient: Anti-inflammatory compound",
+                      "Package Variants: 30, 60, or 100 tablets",
+                      "NDC: 12345-678-90",
                     ].map((detail, i) => (
                         <li key={i} className="flex items-start space-x-2">
                           <Check className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
@@ -297,27 +307,34 @@ export default function ProductPage() {
 
         {/* Similar Items */}
         <div className="max-w-7xl mx-auto px-6 py-8 border-t">
-          <h3 className="text-xl font-bold mb-6">Similar Items You Might Also Like</h3>
+          <h3 className="text-xl font-bold mb-6">Similar Products You Might Also Like</h3>
           <div className="relative">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
+              {[
+                "/image (10).png",
+                "/image (11).png",
+                "/image (12).png",
+                "/image (13).png",
+                "/image (14).png",
+                "/image (15).png"
+              ].map((src, i) => (
                   <div key={i} className="border rounded-md p-2 relative group">
                     <button className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Heart className="h-5 w-5" />
                     </button>
                     <div className="aspect-square rounded-md overflow-hidden bg-gray-100">
                       <Image
-                          src="/placeholder.svg?height=200&width=200"
-                          alt={`Similar product ${i}`}
+                          src={src}
+                          alt={`Similar medication ${i+1}`}
                           width={200}
                           height={200}
                           className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="pt-2">
-                      <div className="text-sm font-medium">TDX Sneakers</div>
-                      <div className="font-bold">$675.00</div>
-                      <div className="text-xs text-gray-500">5 types of shoes available</div>
+                      <div className="text-sm font-medium">PharmaSoothe {i+1}00</div>
+                      <div className="font-bold">${(49.99 + i * 5).toFixed(2)}</div>
+                      <div className="text-xs text-gray-500">{i+2} package sizes available</div>
                       <div className="flex mt-1">
                         {[1, 2, 3, 4, 5].map((star) => (
                             <svg
@@ -329,7 +346,7 @@ export default function ProductPage() {
                               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                             </svg>
                         ))}
-                        <span className="text-xs ml-1">(121)</span>
+                        <span className="text-xs ml-1">({80 + i * 10})</span>
                       </div>
                     </div>
                   </div>
