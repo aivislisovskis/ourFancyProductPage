@@ -114,8 +114,9 @@ export default function ProductPage() {
             {/* Product Details */}
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-2xl font-bold">Premium Pain Relief Medication</h1>
-                <p className="text-sm text-gray-500">PharmaCare Professional Series</p>
+                <h1 className="text-2xl font-bold">Supplemeds™ Mixer</h1>
+                <p className="text-sm text-gray-500">Design your dose. Feel your way.</p>
+                <p className="text-sm text-gray-600">Build your own blend of mood-enhancing, plant-based ingredients. Pick your vibe — focus, euphoria, chill, or creativity — and we'll craft a legal, feel-good formula just for you.</p>
               </div>
 
               <div className="flex items-center space-x-4">
