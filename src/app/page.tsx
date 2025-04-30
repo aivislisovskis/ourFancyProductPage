@@ -312,49 +312,137 @@ export default function ProductPage() {
 
         {/* Similar Items */}
         <div className="max-w-7xl mx-auto px-6 py-8 border-t">
-          <h3 className="text-xl font-bold mb-6">Similar Products You Might Also Like</h3>
+          <h3 className="text-xl font-bold mb-6">Featured Products</h3>
           <div className="relative">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                "/image (10).png",
-                "/image (11).png",
-                "/image (12).png",
-                "/image (13).png",
-                "/image (14).png",
-                "/image (15).png"
-              ].map((src, i) => (
-                  <div key={i} className="border rounded-md p-2 relative group">
-                    <button className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Heart className="h-5 w-5" />
-                    </button>
-                    <div className="aspect-square rounded-md overflow-hidden bg-gray-100">
+                {
+                  name: "Supplemeds Elevate™",
+                  vibe: "Light MDMA / serotonin boost",
+                  ingredients: "5-HTP, Rhodiola, L-Tyrosine, Magnesium, GABA",
+                  effects: [
+                    "Uplifted mood & emotional warmth",
+                    "Feel more open, talkative, connected",
+                    "Reduces social tension"
+                  ],
+                  useCase: "Pre-party, socializing, date nights",
+                  image: "/image (10).png",
+                  color: "bg-pink-100"
+                },
+                {
+                  name: "Supplemeds Focusmode™",
+                  vibe: "Microdosed Adderall",
+                  ingredients: "L-Theanine, Caffeine (natural), Citicoline, Bacopa, Panax Ginseng",
+                  effects: [
+                    "Laser-sharp focus",
+                    "Calm productivity",
+                    "Boosted motivation without the crash"
+                  ],
+                  useCase: "Deep work, creative sprints, study sessions",
+                  image: "/image (11).png",
+                  color: "bg-blue-100"
+                },
+                {
+                  name: "Supplemeds Float™",
+                  vibe: "Light psychedelic / dreamy calm",
+                  ingredients: "Lion's Mane, Reishi, L-Tryptophan, Blue Lotus Extract",
+                  effects: [
+                    "Enhanced introspection and creativity",
+                    "Gentle euphoria",
+                    "Relaxed mental clarity"
+                  ],
+                  useCase: "Music, art, journaling, nature walks",
+                  image: "/image (12).png",
+                  color: "bg-purple-100"
+                },
+                {
+                  name: "Supplemeds ChillDrop™",
+                  vibe: "Microdose of Xanax meets kava",
+                  ingredients: "Kava Kava, Ashwagandha, Magnesium, L-Glycine, Lemon Balm",
+                  effects: [
+                    "Deep calm without sedation",
+                    "Soothes anxious energy",
+                    "Loosens up physical tension"
+                  ],
+                  useCase: "Social anxiety, relaxing after stress, chill evenings",
+                  image: "/image (13).png",
+                  color: "bg-green-100"
+                },
+                {
+                  name: "Supplemeds AfterGlow™",
+                  vibe: "Post-roll come-down support",
+                  ingredients: "NAC, ALA, Vitamin C, Milk Thistle, B-Complex",
+                  effects: [
+                    "Supports liver detox & brain recovery",
+                    "Recharges your mood",
+                    "Fights oxidative stress"
+                  ],
+                  useCase: "Next-day recovery, post-party clarity",
+                  image: "/image (14).png",
+                  color: "bg-orange-100"
+                },
+                {
+                  name: "Supplemeds Synesthesia™",
+                  vibe: "Mild trip / sensory enhancement",
+                  ingredients: "Mucuna Pruriens (L-Dopa), Lion's Mane, Theobromine, Passionflower",
+                  effects: [
+                    "Amplified colors, sound, sensation",
+                    "Heightened sensory perception",
+                    "Creative spark"
+                  ],
+                  useCase: "Light dance floors, visuals, headphones-on adventures",
+                  image: "/image (15).png",
+                  color: "bg-indigo-100"
+                }
+              ].map((product, i) => (
+                <div key={i} className="border rounded-lg p-4 relative group shadow-sm hover:shadow-md transition-shadow">
+                  <button className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Heart className="h-5 w-5" />
+                  </button>
+                  <div className="flex space-x-4">
+                    <div className={`aspect-square rounded-md overflow-hidden ${product.color} w-24 h-24 flex-shrink-0 flex items-center justify-center`}>
                       <Image
-                          src={src}
-                          alt={`Similar medication ${i+1}`}
-                          width={200}
-                          height={200}
-                          className="w-full h-full object-cover"
+                        src={product.image}
+                        alt={product.name}
+                        width={80}
+                        height={80}
+                        className="object-contain"
                       />
                     </div>
-                    <div className="pt-2">
-                      <div className="text-sm font-medium">PharmaSoothe {i+1}00</div>
-                      <div className="font-bold">${(49.99 + i * 5).toFixed(2)}</div>
-                      <div className="text-xs text-gray-500">{i+2} package sizes available</div>
-                      <div className="flex mt-1">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                            <svg
-                                key={star}
-                                className={`w-3 h-3 ${star <= 4 ? "text-yellow-400" : "text-gray-300"}`}
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                        ))}
-                        <span className="text-xs ml-1">({80 + i * 10})</span>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-lg">{product.name}</h4>
+                      <div className="text-sm text-gray-500 mb-1">Vibe: {product.vibe}</div>
+                      <div className="text-xs text-gray-500 mb-2">
+                        <span className="font-medium">Key Ingredients:</span> {product.ingredients}
+                      </div>
+                      
+                      <div className="mb-2">
+                        <span className="text-xs font-medium">Effects:</span>
+                        <ul className="text-xs text-gray-600 mt-1 ml-2">
+                          {product.effects.map((effect, j) => (
+                            <li key={j} className="flex items-start space-x-1 mb-1">
+                              <div className="h-3 w-3 text-green-500 flex-shrink-0 mt-0.5">
+                                <Check className="h-3 w-3" />
+                              </div>
+                              <span>{effect}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div className="text-xs">
+                        <span className="font-medium">Use it for:</span> {product.useCase}
+                      </div>
+                      
+                      <div className="mt-3 flex justify-between items-center">
+                        <div className="font-bold">${(35.99 + i * 2).toFixed(2)}</div>
+                        <Button size="sm" variant="outline" className="text-xs py-1 h-8">
+                          Add to Cart
+                        </Button>
                       </div>
                     </div>
                   </div>
+                </div>
               ))}
             </div>
             <button className="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full shadow-md p-1 -ml-3 z-10">
